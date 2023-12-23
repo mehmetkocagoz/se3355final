@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/app/static/css/mainstyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include jQuery UI library with datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="navbar-custom">
+        <a href="">
+            <img class="logo" src="/app/static/uploads/avis-logo.svg" alt="">
+        </a>   
+    </div>
+    <div class="search-container">
+        <div class="title">
+            <div class="title-input">
+                <input type="checkbox"><span>Araç Kirala</span>
+            </div>  
+        </div>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="content-element">
+                    <span class="information-text">Teslim Alma Ofisi</span>
+                    <input type="text" placeholder="Alış Ofisi Seçiniz" id="DatePicker">
+                    <span class="information-text">Alış Tarihi</span>
+                    
+                </div>
+                <div class="content-element">
+                    <span class="information-text">İade Ofisi</span>
+                    <input type="text" placeholder="İade Ofisi">
+                    <span class="information-text">İade Tarihi</span>
+                </div>
+                <div class="button">
+                    <button type="submit">2 GÜN KİRALA</button>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#DatePicker").datepicker();
+        });
+    </script>
+</body>
+</html>
