@@ -30,20 +30,85 @@
     background-color: #65615D;
 }
 
-.search-container .content{ 
+.search-container .content-wrapper{
+    height: 80px;
+}
+
+.search-container .content-wrapper .content{ 
     display: flex;
+    height: 100%;
+    margin-left: 5rem;
 }
 
 .content .content-element{
-    width: 30%;
+    width: 40%;
     display: flex;
-    margin-left: 5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    height: 100%;
+   
 }
 
-.content-element .information-text{
+.content-element .office-box{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.content-element .office-box .information-text,
+.content-element .date-box .information-text{
     width: 12%;
+    display: flex;
+    align-items: center;
+}
+
+.content-element .office-box input{
+    height: 60%;
+    width: 70%;
+    margin-left: 0.2rem;
+}
+
+.content-element .date-box{
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.content-element .date-box .date{
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #222;
+    width: 30%;
+    height: 70%;
+    justify-content: center;
+}
+
+.date .day{
+    font-size: 25px;
+}
+
+.date .text-month{
+    padding-left: 0.1rem;
+}
+
+.text-month .day-text{
+    text-align: center;
+}
+
+.text-month .month{
+    text-align: center;
+}
+
+.date-box .hour{
+    margin-left: 0.3rem;
+    width: 40%;
+    height: 70%;
+    background-color: #222;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
 }
 
 .content .button button{
