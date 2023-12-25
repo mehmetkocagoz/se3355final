@@ -11,4 +11,4 @@ def login():
 @app.route('/')
 def home():
     vehicle_data = getAll()
-    return render_template('index.html')
+    return render_template('index.html',vehicle_list = vehicle_data)
