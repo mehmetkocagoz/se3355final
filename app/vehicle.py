@@ -50,38 +50,3 @@ def getAllVehicles():
         # Close the connection
         connection.close()
 
-# Create a table
-def createTable():
-    connection = connect()
-    cursor = connection.cursor()
-    # Creating a table for vehicles
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS OFFICE (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Title TEXT NOT NULL,
-    Address TEXT NOT NULL,
-    PhoneNumber TEXT NOT NULL,
-    Latitude REAL NOT NULL,
-    Longitude REAL NOT NULL
-    );
-    ''')
-    connection.commit()
-    connection.close()
-# Insert data into the table
-def insertData():
-    connection = connect()
-    cursor = connection.cursor()
-    title = ""
-    address = ""
-    phone_number = ""
-    latitude = ""
-    longitude = ""
-
-    # Insert data into the OFFICE table
-    cursor.execute('''
-    INSERT INTO OFFICE (Title, Address, PhoneNumber, Latitude, Longitude)
-    VALUES (?, ?, ?, ?, ?);
-    ''', (title, address, phone_number, latitude, longitude))
-
-    connection.commit()
-    connection.close()
