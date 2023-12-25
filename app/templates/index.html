@@ -89,6 +89,19 @@
             </div>    
         </div>
     </div>
+    <div class="main-container">
+        <div class="main-container-content-wrapper">
+            <div class="content">
+                {% for group_price,vehicle_group in vehicle_list.items() %}
+                <ul class="vehicle-card">
+                    {% for vehicle in vehicle_group %}
+                    <li>{{ vehicle.CarType }}</li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function(){
