@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/app/static/css/mainstyle.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <!-- Include jQuery UI library with datepicker -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -29,7 +29,7 @@
                     <div class="office-box">
                         <div class="information-text">
                             <span>Teslim Alma Ofisi</span></div>
-                        <input type="text" placeholder="Alış Ofisi Seçiniz" id="DatePicker">
+                        <input type="text" placeholder="Alış Ofisi Seçiniz">
                     </div>
                     <div class="date-box">
                         <div class="information-text">
@@ -37,17 +37,12 @@
                                 Alış Tarihi
                             </span></div>
                         <div class="date">
-                            <div class="day">
-                                18
-                            </div>
+                            <div class="day" id="day-of-month"></div>
                             <div class="text-month">
-                                <div class="day-text">
-                                    PT
-                                </div>
-                                <div class="month">
-                                    ARA
-                                </div>
+                                <div class="day-text" id="day-of-week"></div>
+                                <div class="month" id="month"></div>
                             </div>
+                            <input type="text" id="DatePicker">
                         </div>
                         <div class="hour">
                             <strong>09</strong>:00
@@ -66,17 +61,12 @@
                                 İade Tarihi
                             </span></span>
                         <div class="date">
-                            <div class="day">
-                                18
-                            </div>
+                            <div class="day" id="day-of-month2"></div>
                             <div class="text-month">
-                                <div class="day-text">
-                                    PT
-                                </div>
-                                <div class="month">
-                                    ARA
-                                </div>
+                                <div class="day-text" id="day-of-week2"></div>
+                                <div class="month" id="month2"></div>
                             </div>
+                            <input type="text" id="DatePicker2">
                         </div>
                         <div class="hour">
                             <strong>09</strong>:00
@@ -90,23 +80,36 @@
         </div>
     </div>
     <div class="main-container">
-        <div class="main-container-content-wrapper">
-            <div class="content">
-                {% for group_price,vehicle_group in vehicle_list.items() %}
-                <ul class="vehicle-card">
-                    {% for vehicle in vehicle_group %}
-                    <li>{{ vehicle.CarType }}</li>
-                    {% endfor %}
-                </ul>
-                {% endfor %}
-            </div>
+        <div class="locations-container">
+            <ul class="location-list">
+                <li class="location">
+                    <span>Avis Ofisi</span>
+                    <div class="location-title">
+
+                    </div>
+                    <div class="location-inside-container">
+                        <div class="location-address">
+                            <p id="demo"></p>
+                        </div>
+                        <div class="location-contact">
+
+                        </div>
+                        <div class="location-work-time">
+                            <div class="work-days">
+                                <strong>Pazartesi - Pazar</strong>
+                            </div>
+                            <div class="work-hours">
+                                09:00 - 19:00
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="map">
+            <div id="googleMap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200065.91038004076!2d27.07971705!3d38.41767505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8fe!2zxLB6bWly!5e0!3m2!1str!2str!4v1703572098410!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $("#DatePicker").datepicker();
-        });
-    </script>
 </body>
 </html>
