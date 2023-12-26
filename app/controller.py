@@ -14,5 +14,5 @@ def getAll():
             grouped_vehicles[group_key] = []
 
         grouped_vehicles[group_key].append(vehicle)
-    print(grouped_vehicles.keys())
+
     return grouped_vehicles
