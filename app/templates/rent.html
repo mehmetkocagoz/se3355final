@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/app/static/css/mainstyle.css">
+    <link rel="stylesheet" href="/app/static/css/rent.css">
 </head>
 <body>
     <div class="navbar-custom">
@@ -15,12 +15,45 @@
     <div class="main-container">
         <div class="main-container-content-wrapper">
             <div class="content">
-                {% for group_price,vehicle_group in vehicle_list.items() %}
-                <ul class="vehicle-card">
-                    {% for vehicle in vehicle_group %}
-                    <li>{{ vehicle.CarType }}</li>
-                    {% endfor %}
-                </ul>
+                {% for vehicle in vehicle_list %}          
+                <div class="vehicle-card">
+                    <div class="vehicle-card-top">
+                        <div class="vehicle-info">
+                            <div class="text-wrapper">
+                                <p class="car-type">{{ vehicle['CarType'] }}</p>
+                                <p class="model-info">{{ vehicle['Brand'] }} {{ vehicle['Model'] }}</p>
+                            </div> 
+                            <div class="title">
+                                Tüm Özellikler/Kiralama Şartları
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vehicle-card-main">
+                        <div class="vehicle-details">
+                            <ul>
+                                <li>{{ vehicle['FuelType'] }}</li>
+                                <li>{{ vehicle['Transmission'] }}</li>
+                                <li>{{ vehicle['DepositPrice'] }} TL Depozito</li>
+                                <li>{{ vehicle['DefaultKM'] }} KM</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img src="{{ vehicle['Image'] }}">
+                    </div>
+                    <div class="vehicle-card-bottom">
+                        <div class="price-info">
+                            <div class="price">
+                                <span class="daily">{{ vehicle['DailyRentPrice'] }}</span> <span class="discounted">{{ vehicle['DiscountedPrice'] }} / Günlük</span>
+                            </div>
+                            <p>Online Ödeme Kazancınız:</p>
+                            <p class="discount">{{ vehicle['Discount'] }}</p>
+                        </div>
+                        <div class="button">
+                            <button>Hemen Öde <span>></span></button>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
         </div>
