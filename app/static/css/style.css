@@ -102,3 +102,20 @@ form button{
     display: flex;
     align-items: center;
 }
+
+/* For registeration page */
+
+form label{
+    margin-top: 0.5rem;
+}
+
+#countries,
+#cities{
+    width: 150px;
+    text-align: center;
+}
+
+#registerButton{
+    margin-top: 0.5rem;
+    width: 120px;
+}
