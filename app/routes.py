@@ -17,7 +17,8 @@ def login():
 
         # Controller will check credentials
         if checkUsernamePasswordForLogin(username,password) == True:
-            return redirect(url_for('home'),current_user = username)
+            session['current_user'] = username
+            return redirect(url_for('home'))
         else:
             wrong_credentials_error = "Wrong username password!"
             return render_template('login.html',error=wrong_credentials_error)
@@ -46,7 +47,19 @@ def register():
             createNewUser(username,password,selected_country,selected_city)
             session['current_user'] = username
             return redirect(url_for('home'))
+
+@app.route('/logout')
+def logout():
+    # Clear the user session
+    session.pop('current_user', None)
     
+    # Redirect to the home page or any other page after logout
+    return redirect(url_for('home'))
+
+@app.route('/')
+def homepage():
+    username = session.get('current_user','Guest')
+    return render_template('index.html',current_user = username)
 
 # Render with all vehicles in the database
 @app.route('/home')
