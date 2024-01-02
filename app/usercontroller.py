@@ -12,7 +12,6 @@ def createNewUser(username,password,country,city):
 
 # There is no business logic
 def checkUsernamePasswordForLogin(username,password):
-    if checkUser(username,password) == True:
-        return True
-    else:
-        return False
+    return checkUser(username,password)
+    
+    
