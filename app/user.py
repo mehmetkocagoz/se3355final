@@ -26,5 +26,10 @@ def checkUser(username,password):
     connection = connect()
     cursor = connection.cursor()
 
+    cursor.execute("SELECT * FROM user WHERE username = ? AND password = ?", (username, password))
+    user = cursor.fetchone()
+
     connection.commit()
     connection.close()
+    
+    return True if user else False
