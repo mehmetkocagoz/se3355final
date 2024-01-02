@@ -1,8 +1,10 @@
-from flask import render_template,request,redirect, url_for
+from flask import render_template,request,redirect, url_for,session
 from app import app
 from app.vehiclecontroller import getAll
 from app.officecontroller import insertDataToTable
 from app.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin
+
+app.secret_key = 'secret_key'
 
 @app.route('/login',methods = ['GET','POST'])
 def login():
@@ -42,12 +44,14 @@ def register():
         # Home page will be redirected
         else:
             createNewUser(username,password,selected_country,selected_city)
-            return redirect(url_for('home'),current_user = username)
+            session['current_user'] = username
+            return redirect(url_for('home'))
     
 
 # Render with all vehicles in the database
 @app.route('/home')
-def home(username='Guest'):
+def home():
+    username = session.get('current_user','Guest')
     return render_template('index.html',current_user = username)
 
 @app.route('/rent')
