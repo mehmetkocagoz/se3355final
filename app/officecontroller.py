@@ -1,4 +1,4 @@
-from app.office import insertData
+from app.office import insertData,createTables,insertCarOffice,insertCity
 
 def insertDataToTable():
-    insertData()
+    createTables()
