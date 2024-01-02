@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/app/static/css/mainstyle.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <!-- Include jQuery UI library with datepicker -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -15,7 +16,34 @@
     <div class="navbar-custom">
         <a href="">
             <img class="logo" src="/app/static/uploads/avis-logo.svg" alt="">
-        </a>   
+        </a>
+        {% if current_user == 'Guest' %}
+        <div class="mid_container_user">
+            Please login for location information!
+         </div>
+        <div class="end_container_register">
+            <div class="text">
+                Üye Girişi
+            </div>
+            <div class="icon">
+                <a href="/login"><i class="fa-solid fa-right-to-bracket"></i></a> 
+            </div>
+        </div>
+        {% endif %}
+
+        {% if current_user != 'Guest' %}
+        <div class="mid_container_user">
+            Welcome {{ current_user }}!
+         </div>
+        <div class="end_container_register">
+            <div class="text">
+                Logout
+            </div>
+            <div class="icon">
+                <a href="/logout"><i class="fa-solid fa-right-to-bracket"></i></a> 
+            </div>
+        </div>
+        {% endif %}
     </div>
     <div class="search-container">
         <div class="title">
@@ -89,7 +117,7 @@
                     </div>
                     <div class="location-inside-container">
                         <div class="location-address">
-                            <p id="demo"></p>
+                            
                         </div>
                         <div class="location-contact">
 
