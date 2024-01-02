@@ -7,10 +7,15 @@ body{
     height: 65px;
     align-items: center;
     display: flex;
+    justify-content: space-between;
 }
 
 .navbar-custom a{
-    margin: 1rem;
+    margin-left: 2rem;
+}
+
+.navbar-custom .end_container_register{
+   margin-right: 2rem;
 }
 
 .search-container{
