@@ -53,57 +53,59 @@
         </div>
         <div class="content-wrapper">
             <div class="content">
-                <div class="content-element">
-                    <div class="office-box">
-                        <div class="information-text">
-                            <span>Teslim Alma Ofisi</span></div>
-                        <input type="text" placeholder="Alış Ofisi Seçiniz">
-                    </div>
-                    <div class="date-box">
-                        <div class="information-text">
-                            <span>
-                                Alış Tarihi
-                            </span></div>
-                        <div class="date">
-                            <div class="day" id="day-of-month"></div>
-                            <div class="text-month">
-                                <div class="day-text" id="day-of-week"></div>
-                                <div class="month" id="month"></div>
+                <form action="{{ url_for('home')}}" method="post" id="rentalForm">
+                    <div class="content-element">
+                        <div class="office-box">
+                            <div class="information-text">
+                                <span>Teslim Alma Ofisi</span></div>
+                            <input type="text" placeholder="Alış Ofisi Seçiniz" name="pickupOffice" required>
+                        </div>
+                        <div class="date-box">
+                            <div class="information-text">
+                                <span>
+                                    Alış Tarihi
+                                </span></div>
+                            <div class="date">
+                                <div class="day" id="day-of-month"></div>
+                                <div class="text-month">
+                                    <div class="day-text" id="day-of-week"></div>
+                                    <div class="month" id="month"></div>
+                                </div>
+                                <input type="text" id="DatePicker" name="DatePicker" required>
                             </div>
-                            <input type="text" id="DatePicker">
-                        </div>
-                        <div class="hour">
-                            <strong>09</strong>:00
-                        </div>
-                    </div>                 
-                </div>
-                <div class="content-element">
-                    <div class="office-box">
-                        <span class="information-text">
-                            <span>İade Ofisi</span></span>
-                        <input type="text" placeholder="İade Ofisi">
-                    </div>
-                    <div class="date-box">
-                        <span class="information-text">
-                            <span>
-                                İade Tarihi
-                            </span></span>
-                        <div class="date">
-                            <div class="day" id="day-of-month2"></div>
-                            <div class="text-month">
-                                <div class="day-text" id="day-of-week2"></div>
-                                <div class="month" id="month2"></div>
+                            <div class="hour">
+                                <input type="time" id="appt" name="pickupHour" required>
                             </div>
-                            <input type="text" id="DatePicker2">
+                        </div>                 
+                    </div>
+                    <div class="content-element">
+                        <div class="office-box">
+                            <span class="information-text">
+                                <span>İade Ofisi</span></span>
+                            <input type="text" placeholder="İade Ofisi" name="returnOffice" required>
                         </div>
-                        <div class="hour">
-                            <strong>09</strong>:00
-                        </div>
-                    </div>  
-                </div>
-                <div class="button">
-                    <button type="submit">2 GÜN KİRALA</button>
-                </div>
+                        <div class="date-box">
+                            <span class="information-text">
+                                <span>
+                                    İade Tarihi
+                                </span></span>
+                            <div class="date">
+                                <div class="day" id="day-of-month2"></div>
+                                <div class="text-month">
+                                    <div class="day-text" id="day-of-week2"></div>
+                                    <div class="month" id="month2"></div>
+                                </div>
+                                <input type="text" id="DatePicker2" name="DatePicker2" required>
+                            </div>
+                            <div class="hour">
+                                <input type="time" id="appt2" name="returnHour" required>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="button">
+                        <button type="submit">2 GÜN KİRALA</button>
+                    </div>
+                </form>
             </div>    
         </div>
     </div>
