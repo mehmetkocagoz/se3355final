@@ -58,7 +58,11 @@
                         <div class="office-box">
                             <div class="information-text">
                                 <span>Teslim Alma Ofisi</span></div>
-                            <input type="text" placeholder="Alış Ofisi Seçiniz" name="pickupOffice" required>
+                            <select name="pickupOffice" id="pickupOffice">
+                                {%for office in office_list %}
+                                    <option value="{{ office['title'] }}">{{ office['title'] }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="date-box">
                             <div class="information-text">
@@ -82,7 +86,11 @@
                         <div class="office-box">
                             <span class="information-text">
                                 <span>İade Ofisi</span></span>
-                            <input type="text" placeholder="İade Ofisi" name="returnOffice" required>
+                                <select name="returnOffice" id="returnOffice">
+                                    {%for office in office_list %}
+                                        <option value="{{ office['title'] }}">{{ office['title'] }}</option>
+                                    {% endfor %}
+                                </select>
                         </div>
                         <div class="date-box">
                             <span class="information-text">
@@ -112,17 +120,17 @@
     <div class="main-container">
         <div class="locations-container">
             <ul class="location-list">
+                {% for office in office_list %}
                 <li class="location">
-                    <span>Avis Ofisi</span>
                     <div class="location-title">
-
+                        <span class="one">Avis Ofisi</span> <span class="two">{{ office['city'] }} {{ office['title'] }}</span> 
                     </div>
                     <div class="location-inside-container">
                         <div class="location-address">
-                            
+                            {{ office['address'] }}
                         </div>
                         <div class="location-contact">
-
+                            {{ office['number'] }}
                         </div>
                         <div class="location-work-time">
                             <div class="work-days">
@@ -134,6 +142,7 @@
                         </div>
                     </div>
                 </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="map">
