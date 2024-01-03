@@ -1,12 +1,11 @@
 import sqlite3
 
 class Office:
-    def __init__(self, title, address, phone_number, latitude, longitude):
+    def __init__(self, city,title, address, phone_number):
+        self.city = city
         self.title = title
         self.address = address
         self.phone_number = phone_number
-        self.latitude = latitude
-        self.longitude = longitude
 
 def connect():
         # Establish a connection to the SQLite database
@@ -17,14 +16,19 @@ def list_of_offices(user_city):
     cursor = connection.cursor()
     if isinstance(user_city, tuple):
         user_city = user_city[0]
-    print(user_city)
-    cursor.execute("SELECT * FROM office WHERE office_city = ?",(user_city,))
+    
+    cursor.execute("SELECT office_city,office_title,office_address,office_number FROM office WHERE office_city = ?",(user_city,))
 
     list_of_offices = cursor.fetchall()
 
+    offices = []
+    for row in list_of_offices:
+        office = Office(*row)
+        offices.append(office)
+
     connection.commit()
     connection.close()
-    return list_of_offices
+    return offices
 
 def office_id_query(pickup_office):
     connection = connect()
