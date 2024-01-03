@@ -52,6 +52,13 @@ body{
     height: 100%;
 }
 
+#pickupOffice,
+#returnOffice{
+    width: 320px;
+    height: 52px;
+    text-align: center;
+}
+
 .content form .content-element{
     width: 40%;
     display: flex;
@@ -178,6 +185,33 @@ body{
 
 .main-container .locations-container{
     width: 30%;
+}
+
+.locations-container .location-list .location{
+    margin-top: 2rem;
+}
+
+.location .location-title span{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.location-title .one{
+    color: red;
+}
+
+.location-title .two{
+    margin-left: 0.5rem;
+}
+
+.location-address,
+.location-contact,
+.location-work-time{
+    margin-top: 0.5rem;
+}
+
+.location .location-inside-container{
+    margin-top: 0.5rem;
 }
 
 .main-container .map{
