@@ -3,7 +3,7 @@ from app.vehicle import getAllVehicles
 import base64
 
 
-def getAll():
+def getAll(car_id_list):
     vehicle_list = getAllVehicles()
     
     vehicle_list_array = []
@@ -19,23 +19,23 @@ def getAll():
         else:
             discountRate = 35
 
-        discount = (vehicle.DailyRentPrice/100)*discountRate
-        discountedPrice = vehicle.DailyRentPrice - discount
-        vehicle_dict ={
-            'CarType' : vehicle.CarType,
-            'Brand' : vehicle.Brand,
-            'Model' : vehicle.Model,
-            'Transmission' : vehicle.Transmission,
-            'FuelType' : vehicle.FuelType,
-            'DepositPrice' : vehicle.DepositPrice,
-            'DailyRentPrice' : vehicle.DailyRentPrice,
-            'DiscountedPrice' : discountedPrice,
-            'Discount' : discount,
-            'DefaultKM' : vehicle.DefaultKM,
-            'Image' : image_url
-        }
-        
-        vehicle_list_array.append(vehicle_dict)
+        if vehicle.ID in car_id_list:
+            discount = (vehicle.DailyRentPrice/100)*discountRate
+            discountedPrice = vehicle.DailyRentPrice - discount
+            vehicle_dict ={
+                'CarType' : vehicle.CarType,
+                'Brand' : vehicle.Brand,
+                'Model' : vehicle.Model,
+                'Transmission' : vehicle.Transmission,
+                'FuelType' : vehicle.FuelType,
+                'DepositPrice' : vehicle.DepositPrice,
+                'DailyRentPrice' : vehicle.DailyRentPrice,
+                'DiscountedPrice' : discountedPrice,
+                'Discount' : discount,
+                'DefaultKM' : vehicle.DefaultKM,
+                'Image' : image_url
+            }
+            vehicle_list_array.append(vehicle_dict)
     
     return vehicle_list_array
 
