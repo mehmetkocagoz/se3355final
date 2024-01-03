@@ -18,7 +18,7 @@ class Vehicle():
 def connect():
     return sqlite3.connect("database.sqlite")
 
-def getAllVehicles():
+def getAllVehiclesFromDatabase():
     # First connect to database
     connection = connect()
 
