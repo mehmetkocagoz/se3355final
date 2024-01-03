@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect, url_for,session
 from app import app
-from app.vehiclecontroller import getAll
-from app.officecontroller import insertDataToTable,takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
+from app.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
+from app.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
 from app.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
 
 app.secret_key = 'secret_key'
@@ -72,6 +72,7 @@ def home():
     if request.method == 'GET':
         username = session.get('current_user','Guest')
         user_city = session.get('user_city','DENİZLİ')
+        print(user_city)
         office_list_for_user_city = takeOfficeListFromDatabase(user_city)
         return render_template('index.html',current_user = username,office_list = office_list_for_user_city)
     else:
@@ -82,14 +83,26 @@ def home():
         return_date = request.form.get('DatePicker2')
         return_time = request.form.get('returnHour')
 
-        # We should look which cars pickup_office has
-        # And render the rent.html with these cars
-        car_id_list = takeOfficesCarListFromDatabase(pickup_office)
-        vehicle_data = getAll(car_id_list)
+        session['pickupOffice'] = pickup_office
 
-        return render_template('rent.html',vehicle_list = vehicle_data)
+        return redirect(url_for('rent'))
 
-@app.route('/rent')
+@app.route('/rent',methods = ['GET','POST'])
 def rent():
-    
-    return render_template('rent.html')
+    # We should look which cars pickup_office has
+    # And render the rent.html with these cars
+    pickup_office = session.get('pickupOffice','ALL')
+    car_id_list = takeOfficesCarListFromDatabase(pickup_office)
+    vehicle_data = getAllWithOffice(car_id_list)
+    if request.method == 'GET':
+        if pickup_office == 'ALL':
+            vehicle_data = getAllVehicles()
+         
+        return render_template('rent.html', vehicle_list = vehicle_data)
+    else:
+        car_type = request.form.get('vehicleType')
+        price_order = request.form.get('price')
+        transmission_type = request.form.get('transmissionType')
+
+        ordered_vehicle_list = order_vehicle_list(car_type,price_order,transmission_type,vehicle_data)
+        return render_template('rent.html',vehicle_list = ordered_vehicle_list)
