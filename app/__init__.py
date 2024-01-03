@@ -9,7 +9,7 @@ app.config.update(
     OAUTH2_CLIENT_SECRET="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",
     OAUTH2_META_URL="https://accounts.google.com/.well-known/openid-configuration",
     FLASK_SECRET= "RandomString",
-    FLASK_PORT= 5008
+    FLASK_PORT= 8000
 )
 
 
