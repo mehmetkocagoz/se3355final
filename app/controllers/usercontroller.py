@@ -1,4 +1,4 @@
-from app.user import insertUserToDatabase,checkUser,findUserCity
+from app.models.user import insertUserToDatabase,checkUser,findUserCity
 
 def checkUserPasswordForRegisteration(password,password_again):
     if password != password_again:

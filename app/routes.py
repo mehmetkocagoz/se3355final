@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect, url_for,session
 from app import app,oauth
-from app.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
-from app.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
-from app.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
+from app.controllers.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
+from app.controllers.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
+from app.controllers.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
 
 app.secret_key = 'secret_key'
 

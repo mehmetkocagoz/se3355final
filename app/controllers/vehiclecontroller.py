@@ -1,5 +1,5 @@
 # Controller will interact with model which is vehicle
-from app.vehicle import getAllVehiclesFromDatabase
+from app.models.vehicle import getAllVehiclesFromDatabase
 import base64
 
 

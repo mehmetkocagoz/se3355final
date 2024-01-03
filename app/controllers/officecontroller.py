@@ -1,4 +1,4 @@
-from app.office import list_of_offices,office_id_query,car_id_list_query
+from app.models.office import list_of_offices,office_id_query,car_id_list_query
 
 def takeOfficeListFromDatabase(user_city):
     user_city = user_city.upper()
