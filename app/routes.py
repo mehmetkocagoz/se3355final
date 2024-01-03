@@ -71,10 +71,7 @@ def googleCallback():
 
 @app.route('/')
 def homepage():
-    username = session.get('current_user','Guest')
-    user_city = session.get('user_city','DENİZLİ')
-    office_list_for_user_city = takeOfficeListFromDatabase(user_city)
-    return render_template('index.html',current_user = username,office_list = office_list_for_user_city)
+    return redirect(url_for('home'))
 
 # Render with all vehicles in the database
 @app.route('/home',methods= ['GET','POST'])
