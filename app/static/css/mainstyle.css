@@ -18,6 +18,18 @@ body{
    margin-right: 2rem;
 }
 
+.navbar-custom .end_container_register{
+    margin-right: 3rem;
+    display: flex;
+}
+
+.icon{
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+
 .search-container{
     background-color: #222;
 }
@@ -89,6 +101,7 @@ body{
 .content-element .date-box .information-text span{
     margin: 0.2rem;
     font-size: 13px;
+    width: 35px;
 }
 
 .content-element .office-box .information-text:before,
@@ -264,5 +277,36 @@ body{
     .content-element .date-box .date,
     .date-box .hour{
         height: 52px;
+    }
+}
+
+@media screen and (max-width:450px){
+    .mid_container_user{
+        display: none;
+    }
+
+    .main-container{
+        display: grid;
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 1rem;
+    }
+
+    .title .title-input{
+        margin-left: 2rem;
+    }
+
+    .content form{
+        margin-left: 2rem;
+    }
+
+    .main-container .locations-container{
+        order: 2;
+        width: 100%;
+    }
+    .main-container .map{
+        margin: 0;
+        order: 1;
+        width: 100%;
     }
 }

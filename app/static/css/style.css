@@ -17,15 +17,17 @@ html, body {
 
 .login-frame{
     width: 25%;
-    height: 60%;
+    height: auto;
     border: 0.2rem solid white;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
 .login-frame .title{
     display: flex;
+    height: 60px;
     justify-content: center;
     color: white;
+    align-items: center;
 }  
 
 .login-frame .error_text{
@@ -64,16 +66,25 @@ form button{
     margin: 1rem;
 }
 
-.login-frame .google-button button{
+.login-frame .google-button a{
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
     height: 35px;
+    text-decoration: none;
+    width: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.login-frame .google-button a:hover{
+    text-decoration: underline;
 }
 
 .or-container {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
     width: 100%;
     color: white;
 }
@@ -91,6 +102,7 @@ form button{
     display: flex;
     justify-content: center;
     padding-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .register a{
@@ -98,14 +110,14 @@ form button{
     text-decoration: none;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
-    width: 150px;
+    width: 50%;
     justify-content: center;
     display: flex;
     align-items: center;
 }
 
 #ask_container{
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 /* For registeration page */
@@ -131,23 +143,24 @@ form label{
 @media screen and (max-width: 1500px) {
     .login-frame{
         width: 40%;
-        height: 65%;
+    }
+
+    form input{
+        padding: 0.3rem;
+    }
+
+    .login-frame .title{
+        height: 40px;
     }
 
     #auth{
         width: 40%;
     }
-
-    .register a{
-        width: 40%;
-    }
     
 }
 
+
 @media screen and (max-width:800px) {
-    .login-frame{
-        width: 50%;
-    }
 
     #loginButton{
         width: 60%;
@@ -165,18 +178,39 @@ form label{
 
     .login-frame{
         width: 60%;
-        height: 60%;
+    }
+
+    .login-frame .title{
+        height: 40px;
+    }
+
+    form input{
+        margin: 0.3rem;
+        padding: 0.2rem;
+    }
+
+    #loginButton{
+        margin-top: 0.5rem;
+        height: 30px;
+    }
+
+    .login-frame .google-button{
+        margin-top: 0.5rem;
+    }
+
+    .login-frame .google-button a{
+        height: 30px;
     }
 
     .or-container hr{
         width: 25%;
     }
 
-   #auth{
-    width: 60%;
-   }
+    #ask_container{
+        margin-top: 1.5rem;
+    }
 
-   .register a{
+   #auth{
     width: 60%;
    }
 }
