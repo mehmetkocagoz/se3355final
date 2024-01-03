@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect, url_for,session
 from app import app
 from app.vehiclecontroller import getAll
-from app.officecontroller import insertDataToTable
-from app.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin
+from app.officecontroller import insertDataToTable,takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
+from app.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
 
 app.secret_key = 'secret_key'
 
@@ -18,6 +18,8 @@ def login():
         # Controller will check credentials
         if checkUsernamePasswordForLogin(username,password) == True:
             session['current_user'] = username
+            user_city = takeUserCityFromDatabase(username)
+            session['user_city'] = user_city
             return redirect(url_for('home'))
         else:
             wrong_credentials_error = "Wrong username password!"
@@ -46,27 +48,32 @@ def register():
         else:
             createNewUser(username,password,selected_country,selected_city)
             session['current_user'] = username
+            session['user_city'] = selected_city
             return redirect(url_for('home'))
 
 @app.route('/logout')
 def logout():
     # Clear the user session
     session.pop('current_user', None)
-    
+    session.pop('user_city',None)
     # Redirect to the home page or any other page after logout
     return redirect(url_for('home'))
 
 @app.route('/')
 def homepage():
     username = session.get('current_user','Guest')
-    return render_template('index.html',current_user = username)
+    user_city = session.get('user_city','DENİZLİ')
+    office_list_for_user_city = takeOfficeListFromDatabase(user_city)
+    return render_template('index.html',current_user = username,office_list = office_list_for_user_city)
 
 # Render with all vehicles in the database
 @app.route('/home',methods= ['GET','POST'])
 def home():
     if request.method == 'GET':
         username = session.get('current_user','Guest')
-        return render_template('index.html',current_user = username)
+        user_city = session.get('user_city','DENİZLİ')
+        office_list_for_user_city = takeOfficeListFromDatabase(user_city)
+        return render_template('index.html',current_user = username,office_list = office_list_for_user_city)
     else:
         pickup_office = request.form.get('pickupOffice')
         return_office = request.form.get('returnOffice')
@@ -75,19 +82,14 @@ def home():
         return_date = request.form.get('DatePicker2')
         return_time = request.form.get('returnHour')
 
-        # Process the form data (you can save it to a database, etc.)
-        # For now, just print the values to the console
-        print('Pickup Office:', pickup_office)
-        print('Return Office:', return_office)
-        print('Pickup Date:', pickup_date)
-        print('Pickup Time:', pickup_time)
-        print('Return Date:', return_date)
-        print('Return Time:', return_time)
+        # We should look which cars pickup_office has
+        # And render the rent.html with these cars
+        car_id_list = takeOfficesCarListFromDatabase(pickup_office)
+        vehicle_data = getAll(car_id_list)
 
-        # You can redirect to a thank you page or return a response
-        return "Form submitted successfully!"
+        return render_template('rent.html',vehicle_list = vehicle_data)
 
 @app.route('/rent')
 def rent():
-    vehicle_data = getAll()
-    return render_template('rent.html',vehicle_list = vehicle_data)
+    
+    return render_template('rent.html')
