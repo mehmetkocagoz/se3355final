@@ -19,9 +19,16 @@ body{
     height: 700px;
 }
 
+
 .main-container .main-container-content-wrapper{
     height: 100%;
     width: 100%;
+}
+
+.main-container-content-wrapper form{
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
 }
 
 .main-container-content-wrapper .content{
