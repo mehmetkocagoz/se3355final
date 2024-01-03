@@ -1,4 +1,4 @@
-from app.user import insertUserToDatabase,checkUser
+from app.user import insertUserToDatabase,checkUser,findUserCity
 
 def checkUserPasswordForRegisteration(password,password_again):
     if password != password_again:
@@ -14,4 +14,5 @@ def createNewUser(username,password,country,city):
 def checkUsernamePasswordForLogin(username,password):
     return checkUser(username,password)
     
-    
+def takeUserCityFromDatabase(username):
+    return findUserCity(username)
