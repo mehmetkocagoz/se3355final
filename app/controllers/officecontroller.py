@@ -1,6 +1,9 @@
 from app.models.office import list_of_offices,office_id_query,car_id_list_query
 
 def takeOfficeListFromDatabase(user_city):
+    if isinstance(user_city, tuple):
+        user_city = user_city[0]
+    
     user_city = user_city.upper()
     user_city = user_city.replace('I','İ')
     offices = list_of_offices(user_city)
