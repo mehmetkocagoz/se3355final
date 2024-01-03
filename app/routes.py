@@ -62,10 +62,30 @@ def homepage():
     return render_template('index.html',current_user = username)
 
 # Render with all vehicles in the database
-@app.route('/home')
+@app.route('/home',methods= ['GET','POST'])
 def home():
-    username = session.get('current_user','Guest')
-    return render_template('index.html',current_user = username)
+    if request.method == 'GET':
+        username = session.get('current_user','Guest')
+        return render_template('index.html',current_user = username)
+    else:
+        pickup_office = request.form.get('pickupOffice')
+        return_office = request.form.get('returnOffice')
+        pickup_date = request.form.get('DatePicker')
+        pickup_time = request.form.get('pickupHour')
+        return_date = request.form.get('DatePicker2')
+        return_time = request.form.get('returnHour')
+
+        # Process the form data (you can save it to a database, etc.)
+        # For now, just print the values to the console
+        print('Pickup Office:', pickup_office)
+        print('Return Office:', return_office)
+        print('Pickup Date:', pickup_date)
+        print('Pickup Time:', pickup_time)
+        print('Return Date:', return_date)
+        print('Return Time:', return_time)
+
+        # You can redirect to a thank you page or return a response
+        return "Form submitted successfully!"
 
 @app.route('/rent')
 def rent():
