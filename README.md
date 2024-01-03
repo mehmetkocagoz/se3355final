@@ -28,3 +28,7 @@ This project is a basic car rental system developed with Flask. Users can regist
 
 - If user not logged in, location will be DENİZLİ
 - Assuming company has offices only in İZMİR and DENİZLİ at the moment
+
+## ER-Diagram
+
+![ER Diagram](ER.PNG)
