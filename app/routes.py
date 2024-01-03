@@ -1,5 +1,5 @@
 from flask import render_template,request,redirect, url_for,session
-from app import app
+from app import app,oauth
 from app.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
 from app.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
 from app.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
@@ -57,6 +57,16 @@ def logout():
     session.pop('current_user', None)
     session.pop('user_city',None)
     # Redirect to the home page or any other page after logout
+    return redirect(url_for('home'))
+
+@app.route('/google-login')
+def googleLogin():
+    return oauth.myApp.authorize_redirect(redirect_uri = url_for("googleCallback"),_external=True)
+
+@app.route("/signin-google")
+def googleCallback():
+    token = oauth.myApp.authorize_access_token()
+    session['user'] = token
     return redirect(url_for('home'))
 
 @app.route('/')
