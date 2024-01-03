@@ -7,10 +7,10 @@ def takeOfficeListFromDatabase(user_city):
     office_list = []
     for office in offices:
         officeDict = {
-            'city' : office[1],
-            'title' : office[2],
-            'address' : office[3],
-            'number' : office[4]
+            'city' : office.city,
+            'title' : office.title,
+            'address' : office.address,
+            'number' : office.phone_number
         }
         office_list.append(officeDict)
     
