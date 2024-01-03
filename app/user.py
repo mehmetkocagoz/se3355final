@@ -33,3 +33,16 @@ def checkUser(username,password):
     connection.close()
     
     return True if user else False
+
+def findUserCity(username):
+    connection = connect()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT city FROM user WHERE username = ?",(username))
+
+    user_city = cursor.fetchone()
+
+    connection.commit()
+    connection.close()
+
+    return user_city
