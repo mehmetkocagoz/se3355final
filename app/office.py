@@ -118,7 +118,9 @@ INSERT INTO city(city_name,latitude,longtitude)
 def list_of_offices(user_city):
     connection = connect()
     cursor = connection.cursor()
-
+    if isinstance(user_city, tuple):
+        user_city = user_city[0]
+    print(user_city)
     cursor.execute("SELECT * FROM office WHERE office_city = ?",(user_city,))
 
     list_of_offices = cursor.fetchall()
