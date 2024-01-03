@@ -14,6 +14,25 @@
     </div>
     <div class="main-container">
         <div class="main-container-content-wrapper">
+            <form action="/rent" method="post">
+                <label for="vehicleType">Vehicle Type:</label>
+                <select name="vehicleType" id="">
+                    <option value="ALL">Tüm Araçlar</option>
+                    <option value="EKONOMİK">Ekonomik</option>
+                </select>
+                <label for="price">Sırala:</label>
+                <select name="price" id="">
+                    <option value="ASC">En Düşük Fiyat</option>
+                    <option value="DESC">En Yüksek Fiyat</option>
+                </select>
+                <label for="transmissionType">Vites</label>
+                <select name="transmissionType" id="">
+                    <option value="ALL">ALL</option>
+                    <option value="OTOMATİK">Otomatik</option>
+                    <option value="MANUEL">Manuel</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
             <div class="content">
                 {% for vehicle in vehicle_list %}          
                 <div class="vehicle-card">
