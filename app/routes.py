@@ -1,5 +1,5 @@
 from flask import render_template,request,redirect, url_for,session
-from app import app,oauth
+from app import app,flow
 from app.controllers.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
 from app.controllers.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
 from app.controllers.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
@@ -58,15 +58,30 @@ def logout():
     session.pop('user_city',None)
     # Redirect to the home page or any other page after logout
     return redirect(url_for('home'))
-
+# Configure logging
+import logging
+logging.basicConfig(level=logging.DEBUG)
 @app.route('/google-login')
 def googleLogin():
-    return oauth.myApp.authorize_redirect(redirect_uri = url_for("googleCallback"),_external=True)
+    authorization_url, state = flow.authorization_url()
+    session["state"] = state
+    logging.debug("Redirecting to Google authorization URL: %s", authorization_url)
+    return redirect(authorization_url)
 
 @app.route("/signin-google")
 def googleCallback():
-    token = oauth.myApp.authorize_access_token()
-    session['user'] = token
+    logging.debug("Received callback request with URL: %s", request.url)
+    try:
+        flow.fetch_token(authorization_response=request.url)
+    except Exception as e:
+        logging.error("Error fetching token: %s", str(e))
+        # Handle the error as needed, e.g., redirect to an error page
+
+    if not session["state"] == request.args["state"]:
+        logging.error("State mismatch. Redirecting to login.")
+        return redirect(url_for('login'))
+
+    logging.info("State matched. Redirecting to home.")
     return redirect(url_for('home'))
 
 @app.route('/')
