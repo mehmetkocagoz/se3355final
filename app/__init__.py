@@ -13,6 +13,8 @@ app.config.update(
     FLASK_PORT= 8000
 )
 
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent,"client_secret.json")
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,

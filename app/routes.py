@@ -3,6 +3,11 @@ from app import app,flow
 from app.controllers.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
 from app.controllers.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
 from app.controllers.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
+from google.oauth2 import id_token
+import requests
+
 
 app.secret_key = 'secret_key'
 
@@ -83,8 +88,18 @@ def googleCallback():
         logging.error("State mismatch. Redirecting to login.")
         return redirect(url_for('login'))
 
+    credentials = flow.credentials
+    request_session = requests.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token=credentials._id_token,
+        request=token_request
+    )
+
     logging.info("State matched. Redirecting to home.")
-    return redirect(url_for('home'))
+    return id_info
 
 @app.route('/')
 def homepage():
