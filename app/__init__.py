@@ -1,6 +1,7 @@
+import pathlib
 from flask import Flask
-from authlib.integrations.flask_client import OAuth
-
+from google_auth_oauthlib.flow import Flow
+import os
 # Create a Flask application instance
 app = Flask(__name__,static_url_path='/app/static')
 
@@ -12,16 +13,12 @@ app.config.update(
     FLASK_PORT= 8000
 )
 
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent,"client_secret.json")
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=["https://www.googleapis.com/auth/user.birthday.read"],
+    redirect_uri="https://se335finalapp.azurewebsites.net/signin-google")
 
-oauth = OAuth(app)
-
-oauth.register(name="myApp",
-               client_id = app.config.get('OAUTH2_CLIENT_ID'),
-               client_secret = app.config.get('OAUTH2_CLIENT_SECRET'),
-               server_metadata_url = app.config.get('OAUTH2_META_URL'),
-               client_kwargs = {
-                   "scope": "https://www.googleapis.com/auth/user.emails.read"
-               })
 
 # Import routes module to register the routes with the app
 from app import routes
