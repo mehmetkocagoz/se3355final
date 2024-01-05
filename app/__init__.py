@@ -17,7 +17,7 @@ client_secrets_file = os.path.join(pathlib.Path(__file__).parent,"client_secret.
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/user.birthday.read","https://www.googleapis.com/auth/userinfo.profile"],
-    redirect_uri="https://se335finalapp.azurewebsites.net/signin-google")
+    redirect_uri="https://se335finalapp.azurewebsites.net/.auth/login/google/callback")
 
 
 # Import routes module to register the routes with the app

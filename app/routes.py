@@ -58,6 +58,8 @@ def logout():
     session.pop('user_city',None)
     # Redirect to the home page or any other page after logout
     return redirect(url_for('home'))
+
+
 # Configure logging
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -68,7 +70,7 @@ def googleLogin():
     logging.debug("Redirecting to Google authorization URL: %s", authorization_url)
     return redirect(authorization_url)
 
-@app.route("/signin-google")
+@app.route("/.auth/login/google/callback")
 def googleCallback():
     logging.debug("Received callback request with URL: %s", request.url)
     try:
