@@ -1,3 +1,6 @@
+function submitForm() {
+    document.getElementById("cityForm").submit();
+}
 document.addEventListener("DOMContentLoaded", function(){
      // Date-related functionality
      const daysOfWeek = ["PZ", "PT", "SA", "ÇA", "PE", "CU", "CT"];
@@ -20,28 +23,6 @@ document.addEventListener("DOMContentLoaded", function(){
      }
 
     updateDateElements();
-    // Geolocation functionality
-    const x = document.getElementById("demo");
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, handleGeolocationError);
-        } else { 
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;
-    }
-
-    function handleGeolocationError(error) {
-        x.innerHTML = "Error getting geolocation: " + error.message;
-    }
-
-    // Call the getLocation function when the window is loaded
-    window.addEventListener("load", getLocation);
 
     // jQuery DatePicker initialization
     $(document).ready(function(){
