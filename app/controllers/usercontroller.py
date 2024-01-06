@@ -2,9 +2,12 @@ from app.models.user import insertUserToDatabase,checkUser,findUserCity
 
 def checkUserPasswordForRegisteration(password,password_again):
     if password != password_again:
-        return False
+        return False,"Passwords Should Match"
+    elif len(password)< 8 or not any(char.isdigit() for char in password) or not any(char.isalnum() for char in password):
+        return False,"Invalid password. Please ensure it's at least 8 characters long, contains at least 1 number, and 1 alphanumeric character."
     else:
         return True
+
 
 # There is no business logic    
 def createNewUser(username,password,country,city):
