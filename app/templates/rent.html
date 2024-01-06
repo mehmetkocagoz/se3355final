@@ -10,10 +10,24 @@
     <div class="navbar-custom">
         <a href="/home">
             <img class="logo" src="/app/static/uploads/avis-logo.svg" alt="">
-        </a>   
+        </a>
+        <div class="home_return">
+            <a href="{{ url_for('home') }}">Return Home</a>
+        </div>
     </div>
     <div class="main-container">
         <div class="main-container-content-wrapper">
+            <div class="attributes">
+                <div class="wrapper">
+                    <div class="date">
+                        <strong>{{ session['pickup_date'] }}-{{ session['pickup_time'] }} <span>></span> {{ session['return_date'] }} {{ session['return_time'] }}</strong>
+                    </div>
+                    <div class="office">
+                        {{ session['user_city'] }}-{{ session['pickupOffice'] }}
+                    </div>
+                </div>  
+            </div>
+
             <form action="/rent" method="post">
                 <label for="vehicleType">Vehicle Type:</label>
                 <select name="vehicleType" id="">

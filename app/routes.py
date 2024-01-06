@@ -118,7 +118,8 @@ def home():
     if request.method == 'GET':
         username = session.get('current_user','Guest')
         user_city = session.get('user_city','DENİZLİ')
-        print(user_city)
+        session['current_user'] = username
+        session['user_city'] = user_city
         office_list_for_user_city = takeOfficeListFromDatabase(user_city)
         return render_template('index.html',current_user = username,office_list = office_list_for_user_city,user_city = user_city)
     else:
@@ -137,7 +138,10 @@ def home():
             return_time = request.form.get('returnHour')
 
             session['pickupOffice'] = pickup_office
-
+            session['pickup_date'] = pickup_date
+            session['pickup_time'] = pickup_time
+            session['return_date'] = return_date
+            session['return_time'] = return_time
             return redirect(url_for('rent'))
 
 @app.route('/rent',methods = ['GET','POST'])
