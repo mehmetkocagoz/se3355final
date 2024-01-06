@@ -2,7 +2,7 @@ from flask import render_template,request,redirect, url_for,session
 from app import app,flow
 from app.controllers.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
 from app.controllers.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
-from app.controllers.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase
+from app.controllers.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase,formatBy
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 from google.oauth2 import id_token
@@ -55,6 +55,7 @@ def register():
         else:
             createNewUser(email,username,password,selected_country,selected_city)
             session['current_user'] = username
+            selected_city = formatBy(selected_city)
             session['user_city'] = selected_city
             return redirect(url_for('home'))
 

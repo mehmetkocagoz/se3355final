@@ -30,3 +30,8 @@ def takeUserCityFromDatabase(username):
     user_city = user_city.upper()
     user_city = user_city.replace('I','İ')
     return user_city
+
+def formatBy(selected_city):
+    selected_city = selected_city.upper()
+    selected_city = selected_city.replace('I','İ')
+    return selected_city
