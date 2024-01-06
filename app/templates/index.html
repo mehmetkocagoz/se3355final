@@ -43,7 +43,16 @@
         <div class="title">
             <div class="title-input">
                 <input type="radio"><span>Araç Kirala</span>
-            </div>  
+            </div>
+            <div class="city_update">
+                <form action="{{ url_for('home')}}" method="post" onchange="submitForm()" id="cityForm">
+                    <select name="city_update" id="cityUpdate">
+                        <option value="">Update City</option>
+                        <option value="İZMİR">İzmir</option>
+                        <option value="DENİZLİ">Denizli</option>
+                    </select>
+                </form>
+            </div>
         </div>
         <div class="content-wrapper">
             <div class="content">
@@ -141,7 +150,13 @@
         </div>
         <div class="map">
             <div id="googleMap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200065.91038004076!2d27.07971705!3d38.41767505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8fe!2zxLB6bWly!5e0!3m2!1str!2str!4v1703572098410!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+                {% if user_city == 'İZMİR' %}
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d200065.91038004076!2d27.07971705!3d38.41767505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bbd862a762cacd%3A0x628cbba1a59ce8fe!2zxLB6bWly!5e0!3m2!1str!2str!4v1703572098410!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                {% endif %}
+                {% if user_city == 'DENİZLİ' %}
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100905.73494629067!2d29.0816466!3d37.78290975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c73fb1353a6a69%3A0x2e3363fee62068ae!2zRGVuaXpsaSwgS3Vta8Sxc8SxaywgRGVuaXpsaQ!5e0!3m2!1str!2str!4v1704504250872!5m2!1str!2str" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                {% endif %}
+            </div>
         </div>
     </div>
 </body>
