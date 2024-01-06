@@ -120,18 +120,25 @@ def home():
         user_city = session.get('user_city','DENİZLİ')
         print(user_city)
         office_list_for_user_city = takeOfficeListFromDatabase(user_city)
-        return render_template('index.html',current_user = username,office_list = office_list_for_user_city)
+        return render_template('index.html',current_user = username,office_list = office_list_for_user_city,user_city = user_city)
     else:
-        pickup_office = request.form.get('pickupOffice')
-        return_office = request.form.get('returnOffice')
-        pickup_date = request.form.get('DatePicker')
-        pickup_time = request.form.get('pickupHour')
-        return_date = request.form.get('DatePicker2')
-        return_time = request.form.get('returnHour')
+        if 'city_update' in request.form:
+            selected_city = request.form['city_update']
+            session['user_city'] = selected_city
+            username = session.get('current_user','Guest')
+            office_list_for_user_city = takeOfficeListFromDatabase(selected_city)
+            return render_template('index.html',current_user = username,office_list = office_list_for_user_city,user_city=selected_city)
+        else:
+            pickup_office = request.form.get('pickupOffice')
+            return_office = request.form.get('returnOffice')
+            pickup_date = request.form.get('DatePicker')
+            pickup_time = request.form.get('pickupHour')
+            return_date = request.form.get('DatePicker2')
+            return_time = request.form.get('returnHour')
 
-        session['pickupOffice'] = pickup_office
+            session['pickupOffice'] = pickup_office
 
-        return redirect(url_for('rent'))
+            return redirect(url_for('rent'))
 
 @app.route('/rent',methods = ['GET','POST'])
 def rent():
