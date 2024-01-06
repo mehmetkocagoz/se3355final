@@ -34,7 +34,13 @@ html, body {
     color: white;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
+
+#registerButton{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+   }
 
 .login-frame form{
     display: flex;
@@ -101,8 +107,7 @@ form button{
     height: 30px;
     display: flex;
     justify-content: center;
-    padding-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
 }
 
 .register a{
@@ -114,6 +119,10 @@ form button{
     justify-content: center;
     display: flex;
     align-items: center;
+}
+
+.register a:hover{
+    text-decoration: underline;
 }
 
 #ask_container{

@@ -44,9 +44,9 @@ def register():
 
         # Passwords should match!
         # Controller will take action here!
-        if checkUserPasswordForRegisteration(password,password_again) == False:
-            match_error = "Passwords should match!"
-            return render_template('register.html',message = match_error)
+        status,error = checkUserPasswordForRegisteration(password,password_again)
+        if status == False:
+            return render_template('register.html',message = error)
         # If passwords match
         # New user will create in the database
         # Home page will be redirected
