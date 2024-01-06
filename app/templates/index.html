@@ -22,11 +22,8 @@
             Please login for location information!
          </div>
         <div class="end_container_register">
-            <div class="text">
-                Üye Girişi
-            </div>
             <span class="icon">
-                <a href="/login"><i class="fa-solid fa-right-to-bracket"></i></a> 
+                <a href="/login"><span>Üye Girişi</span><i class="fa-solid fa-right-to-bracket"></i></a> 
             </span>
         </div>
         {% endif %}
@@ -36,19 +33,16 @@
             Welcome {{ current_user }}!
          </div>
         <div class="end_container_register">
-            <div class="text">
-                Logout
-            </div>
-            <div class="icon">
-                <a href="/logout"><i class="fa-solid fa-right-to-bracket"></i></a> 
-            </div>
+            <span class="icon">
+                <a href="/logout"><span>Logout</span><i class="fa-solid fa-right-to-bracket"></i></a> 
+            </span>
         </div>
         {% endif %}
     </div>
     <div class="search-container">
         <div class="title">
             <div class="title-input">
-                <input type="checkbox"><span>Araç Kirala</span>
+                <input type="radio"><span>Araç Kirala</span>
             </div>  
         </div>
         <div class="content-wrapper">

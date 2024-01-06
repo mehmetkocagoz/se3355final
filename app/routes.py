@@ -93,13 +93,20 @@ def googleCallback():
     cached_session = cachecontrol.CacheControl(request_session)
     token_request = google.auth.transport.requests.Request(session=cached_session)
 
+    # token_request and credentials._id_token will be used for verification
     id_info = id_token.verify_oauth2_token(
         id_token=credentials._id_token,
         request=token_request
     )
+    # I will just use name attribute of id_info
+    # It returns as name attribute from Google
+    # User_city is not include in Google
+    # Therefore I will ask user city later
+    user_name = id_info['name']
+    session['current_user'] = user_name
 
     logging.info("State matched. Redirecting to home.")
-    return id_info
+    return redirect(url_for('home'))
 
 @app.route('/')
 def homepage():
