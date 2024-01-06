@@ -17,13 +17,14 @@ def login():
         return render_template('login.html')
     elif request.method == 'POST':
         # Access form data
-        username = request.form.get('username')
+        email = request.form.get('email')
         password = request.form.get('password')
 
         # Controller will check credentials
-        if checkUsernamePasswordForLogin(username,password) == True:
-            session['current_user'] = username
-            user_city = takeUserCityFromDatabase(username)
+        status , user_name = checkUsernamePasswordForLogin(email,password)
+        if status == True:
+            session['current_user'] = user_name
+            user_city = takeUserCityFromDatabase(user_name)
             session['user_city'] = user_city
             return redirect(url_for('home'))
         else:
@@ -36,6 +37,7 @@ def register():
         return render_template('register.html')
     elif request.method == 'POST':
         # Access form data
+        email = request.form.get('email')
         username = request.form.get('username')
         password = request.form.get('password')
         password_again = request.form.get('passwordAgain')
@@ -51,7 +53,7 @@ def register():
         # New user will create in the database
         # Home page will be redirected
         else:
-            createNewUser(username,password,selected_country,selected_city)
+            createNewUser(email,username,password,selected_country,selected_city)
             session['current_user'] = username
             session['user_city'] = selected_city
             return redirect(url_for('home'))

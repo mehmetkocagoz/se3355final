@@ -1,8 +1,9 @@
 import sqlite3
 
 class User():
-    def __init__(self,ID,username,password,country,city):
+    def __init__(self,ID,email,username,password,country,city):
         self.ID = ID
+        self.email = email
         self.username = username
         self.password = password
         self.country = country
@@ -13,26 +14,29 @@ def connect():
     return sqlite3.connect("database.sqlite")
 
 # Creates a user
-def insertUserToDatabase(username,password,country,city):
+def insertUserToDatabase(email,username,password,country,city):
     connection = connect()
     cursor = connection.cursor()
 
-    cursor.execute("INSERT INTO user(username,password,country,city) VALUES (?,?,?,?)",(username,password,country,city,))
+    cursor.execute("INSERT INTO user(email,username,password,country,city) VALUES (?,?,?,?,?)",(email,username,password,country,city,))
 
     connection.commit()
     connection.close()
 
-def checkUser(username,password):
+def checkUser(email,password):
     connection = connect()
     cursor = connection.cursor()
 
-    cursor.execute("SELECT * FROM user WHERE username = ? AND password = ?", (username, password,))
+    cursor.execute("SELECT username FROM user WHERE email = ? AND password = ?", (email, password,))
     user = cursor.fetchone()
-
+    
     connection.commit()
     connection.close()
-    
-    return True if user else False
+
+    if user == None:
+        return False, None
+    else:
+        return True,user
 
 def findUserCity(username):
     connection = connect()

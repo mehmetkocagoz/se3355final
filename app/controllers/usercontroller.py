@@ -6,16 +6,21 @@ def checkUserPasswordForRegisteration(password,password_again):
     elif len(password)< 8 or not any(char.isdigit() for char in password) or not any(char.isalnum() for char in password):
         return False,"Invalid password. Please ensure it's at least 8 characters long, contains at least 1 number, and 1 alphanumeric character."
     else:
-        return True
+        return True, "TRUE"
 
 
 # There is no business logic    
-def createNewUser(username,password,country,city):
-    insertUserToDatabase(username,password,country,city)
+def createNewUser(email,username,password,country,city):
+    insertUserToDatabase(email,username,password,country,city)
 
 # There is no business logic
-def checkUsernamePasswordForLogin(username,password):
-    return checkUser(username,password)
+def checkUsernamePasswordForLogin(email,password):
+    
+    status, username = checkUser(email,password)
+
+    if isinstance(username,tuple):
+        username = username[0]
+    return status,username
     
 def takeUserCityFromDatabase(username):
     user_city = findUserCity(username)
