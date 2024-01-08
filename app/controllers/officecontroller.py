@@ -1,4 +1,4 @@
-from app.models.office import list_of_offices,office_id_query,car_id_list_query,city_id_query,town_list_query
+from app.models.office import list_of_offices,office_id_query,car_id_list_query,city_id_query,town_list_query,lat_long_query
 
 def takeOfficeListFromDatabase(user_city):
     if isinstance(user_city, tuple):
@@ -53,3 +53,9 @@ def takeTownListFromDatabase(city_id):
         }
         towns.append(town_dict)
     return towns
+
+def takeLatLong(town_name):
+    info = lat_long_query(town_name)
+    lat = info[0][0]
+    long = info[0][1]
+    return lat,long
