@@ -47,9 +47,16 @@
             <div class="city_update">
                 <form action="{{ url_for('home')}}" method="post" onchange="submitForm()" id="cityForm">
                     <select name="city_update" id="cityUpdate">
-                        <option value="">Update City</option>
-                        <option value="İZMİR">İzmir</option>
+                        <option value="SAME">Update City</option>
                         <option value="DENİZLİ">Denizli</option>
+                        <option value="İZMİR">İzmir</option>
+                    </select>
+        
+                    <select name="town_update" id="townUpdate">
+                        <option value="SAME">Update Town</option>
+                        {% for town in town_list %}
+                        <option value="{{ town['town_name'] }}">{{ town['town_name'] }}</option>
+                        {% endfor %}
                     </select>
                 </form>
             </div>
