@@ -27,6 +27,9 @@ This project is a basic car rental system developed with Flask. Users can regist
 ## Assumptions
 
 - If user not logged in, location will be DENİZLİ
+- In default town informations are ; DENİZLİ - MERKEZ , İZMİR - ALSANCAK
+- User can change selected town and iframe will be updated via that change
+- Only 30 km closest offices will be listed
 - Assuming company has offices only in İZMİR and DENİZLİ at the moment
 
 ## ER-Diagram
