@@ -1,6 +1,26 @@
 function submitForm() {
     document.getElementById("cityForm").submit();
 }
+
+if ("geolocation" in navigator) {
+    // Get the current position
+    navigator.geolocation.getCurrentPosition(function(position) {
+        // Access the latitude and longitude
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Call the function with the geolocation coordinates
+        generateMap(latitude, longitude);
+    }, function(error) {
+        // Handle errors (e.g., user denies permission)
+        console.error("Error getting geolocation:", error.message);
+    });
+} else {
+    // Geolocation is not supported by this browser
+    console.error("Geolocation is not supported by this browser");
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const daysOfWeek = ["PZ", "PT", "SA", "ÇA", "PE", "CU", "CT"];
     const months = ["OCA", "ŞUB", "MAR", "NİS", "MAY", "HAZ", "TEM", "AĞU", "EYL", "EKİ", "KAS", "ARA"];
