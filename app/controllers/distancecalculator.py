@@ -13,8 +13,6 @@ def haversine(lat1, lon1, lat2, lon2):
     return distance
 
 def calculate_distance(selected_town,town_list):
-    print(town_list)
-    print(selected_town)
     for town in town_list:
         if town['town_name'] == selected_town:
             selected_town_info = town
@@ -23,5 +21,4 @@ def calculate_distance(selected_town,town_list):
         distance = haversine(selected_town_info['town_latitude'],selected_town_info['town_longitude'],town['town_latitude'],town['town_longitude'])
         if distance <= 30:
             closest_town_list.append(town)
-    print(closest_town_list)
     return closest_town_list
