@@ -1,8 +1,9 @@
 from flask import render_template,request,redirect, url_for,session
 from app import app,flow
 from app.controllers.vehiclecontroller import getAllWithOffice,getAllVehicles,order_vehicle_list
-from app.controllers.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase
+from app.controllers.officecontroller import takeOfficeListFromDatabase,takeOfficesCarListFromDatabase,takeCityIdFromDatabase,takeTownListFromDatabase,takeLatLong
 from app.controllers.usercontroller import checkUserPasswordForRegisteration,createNewUser,checkUsernamePasswordForLogin,takeUserCityFromDatabase,formatBy
+from app.controllers.distancecalculator import calculate_distance
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 from google.oauth2 import id_token
@@ -62,8 +63,7 @@ def register():
 @app.route('/logout')
 def logout():
     # Clear the user session
-    session.pop('current_user', None)
-    session.pop('user_city',None)
+    session.clear()
     # Redirect to the home page or any other page after logout
     return redirect(url_for('home'))
 
@@ -124,14 +124,51 @@ def home():
         session['current_user'] = username
         session['user_city'] = user_city
         office_list_for_user_city = takeOfficeListFromDatabase(user_city)
-        return render_template('index.html',current_user = username,office_list = office_list_for_user_city,user_city = user_city)
+        city_id = takeCityIdFromDatabase(user_city)
+        town_list = takeTownListFromDatabase(city_id)
+        # Denizli city_id == 1
+        if city_id == 1:
+            closest_offices = calculate_distance("MERKEZ",town_list)
+            session['town'] = "MERKEZ"
+        else:
+            closest_offices = calculate_distance("ALSANCAK",town_list)
+            session['town'] = "ALSANCAK"
+        town_name = session.get('town')
+        latitude, longitude = takeLatLong(town_name)
+        google_maps_url = f'https://maps.google.com/maps?q={latitude},{longitude}&hl=en;z=14&output=embed'    
+        session['closest_offices'] = closest_offices
+        return render_template('index.html',current_user = username,office_list = office_list_for_user_city,town_list = closest_offices,google_maps_url=google_maps_url)
     else:
         if 'city_update' in request.form:
             selected_city = request.form['city_update']
-            session['user_city'] = selected_city
+            if selected_city != "SAME":
+                session['user_city'] = selected_city
+                print(selected_city)
+                if selected_city == "İZMİR":
+                    session['town'] = "ALSANCAK"
+                else:
+                    session['town'] = "MERKEZ"
+            else:
+                selected_city = session.get('user_city')
             username = session.get('current_user','Guest')
             office_list_for_user_city = takeOfficeListFromDatabase(selected_city)
-            return render_template('index.html',current_user = username,office_list = office_list_for_user_city,user_city=selected_city)
+            city_id = takeCityIdFromDatabase(selected_city)
+            town_list = takeTownListFromDatabase(city_id)
+            
+
+            selected_town = request.form['town_update']
+           
+            if selected_town != "SAME":
+                closest_offices = calculate_distance(selected_town,town_list)
+                latitude,longitude = takeLatLong(selected_town)
+                session['closest_offices'] = closest_offices
+            elif selected_town == "SAME":
+                town_name = session.get('town')
+                latitude, longitude = takeLatLong(town_name)
+                closest_offices = session.get('closest_offices')
+            
+            google_maps_url = f'https://maps.google.com/maps?q={latitude},{longitude}&hl=en;z=14&output=embed'    
+            return render_template('index.html',current_user = username,office_list = office_list_for_user_city,user_city=selected_city,town_list = town_list,google_maps_url=google_maps_url)
         else:
             pickup_office = request.form.get('pickupOffice')
             return_office = request.form.get('returnOffice')
