@@ -53,3 +53,39 @@ def car_id_list_query(office_id):
     connection.commit()
     connection.close()
     return car_id_list
+
+def city_id_query(user_city):
+    connection = connect()
+    cursor = connection.cursor()
+    
+    cursor.execute("SELECT city_id FROM city WHERE city_name = ?",(user_city,))
+
+    city_id = cursor.fetchone()
+
+    connection.commit()
+    connection.close()
+    return city_id
+
+def town_list_query(city_id):
+    connection = connect()
+    cursor = connection.cursor()
+    
+    cursor.execute("SELECT * FROM city_town WHERE city_id = ?",(city_id,))
+
+    town_list = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+    return town_list
+
+def lat_long_query(town_name):
+    connection = connect()
+    cursor = connection.cursor()
+    
+    cursor.execute("SELECT latitude, longitude FROM city_town WHERE town = ?",(town_name,))
+
+    info = cursor.fetchall()
+
+    connection.commit()
+    connection.close()
+    return info
